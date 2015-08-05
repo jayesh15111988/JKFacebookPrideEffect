@@ -14,6 +14,11 @@
 		38FBE2EA1B719F1F00C73E08 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38FBE2E91B719F1F00C73E08 /* Images.xcassets */; };
 		38FBE2ED1B719F1F00C73E08 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38FBE2EB1B719F1F00C73E08 /* LaunchScreen.xib */; };
 		38FBE2F91B719F1F00C73E08 /* JKFacebookPrideEffectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBE2F81B719F1F00C73E08 /* JKFacebookPrideEffectTests.m */; };
+		38FBE3051B719FD300C73E08 /* JKFacebookPrideEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBE3041B719FD300C73E08 /* JKFacebookPrideEffect.m */; };
+		38FBE3071B719FFB00C73E08 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38FBE3061B719FFB00C73E08 /* UIKit.framework */; };
+		38FBE30D1B71A1E400C73E08 /* UIImage+toGrayScale.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBE30C1B71A1E400C73E08 /* UIImage+toGrayScale.m */; };
+		38FBE3101B71A29D00C73E08 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38FBE30F1B71A29D00C73E08 /* AVFoundation.framework */; };
+		38FBE3131B71A32300C73E08 /* sohini_patil.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 38FBE3121B71A32300C73E08 /* sohini_patil.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +45,14 @@
 		38FBE2F21B719F1F00C73E08 /* JKFacebookPrideEffectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JKFacebookPrideEffectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		38FBE2F71B719F1F00C73E08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38FBE2F81B719F1F00C73E08 /* JKFacebookPrideEffectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JKFacebookPrideEffectTests.m; sourceTree = "<group>"; };
+		38FBE3031B719FD300C73E08 /* JKFacebookPrideEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKFacebookPrideEffect.h; sourceTree = "<group>"; };
+		38FBE3041B719FD300C73E08 /* JKFacebookPrideEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKFacebookPrideEffect.m; sourceTree = "<group>"; };
+		38FBE3061B719FFB00C73E08 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		38FBE30B1B71A1E400C73E08 /* UIImage+toGrayScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+toGrayScale.h"; sourceTree = "<group>"; };
+		38FBE30C1B71A1E400C73E08 /* UIImage+toGrayScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+toGrayScale.m"; sourceTree = "<group>"; };
+		38FBE30E1B71A22A00C73E08 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		38FBE30F1B71A29D00C73E08 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		38FBE3121B71A32300C73E08 /* sohini_patil.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sohini_patil.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +60,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38FBE3101B71A29D00C73E08 /* AVFoundation.framework in Frameworks */,
+				38FBE3071B719FFB00C73E08 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +78,8 @@
 		38FBE2D01B719F1F00C73E08 = {
 			isa = PBXGroup;
 			children = (
+				38FBE30F1B71A29D00C73E08 /* AVFoundation.framework */,
+				38FBE3061B719FFB00C73E08 /* UIKit.framework */,
 				38FBE2DB1B719F1F00C73E08 /* JKFacebookPrideEffect */,
 				38FBE2F51B719F1F00C73E08 /* JKFacebookPrideEffectTests */,
 				38FBE2DA1B719F1F00C73E08 /* Products */,
@@ -81,6 +98,7 @@
 		38FBE2DB1B719F1F00C73E08 /* JKFacebookPrideEffect */ = {
 			isa = PBXGroup;
 			children = (
+				38FBE3021B719FA300C73E08 /* Classes */,
 				38FBE2E01B719F1F00C73E08 /* AppDelegate.h */,
 				38FBE2E11B719F1F00C73E08 /* AppDelegate.m */,
 				38FBE2E31B719F1F00C73E08 /* ViewController.h */,
@@ -117,6 +135,43 @@
 				38FBE2F71B719F1F00C73E08 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		38FBE3021B719FA300C73E08 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				38FBE3111B71A31800C73E08 /* Sample Images */,
+				38FBE30A1B71A1D500C73E08 /* Categories */,
+				38FBE3091B71A1CA00C73E08 /* Main Source */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		38FBE3091B71A1CA00C73E08 /* Main Source */ = {
+			isa = PBXGroup;
+			children = (
+				38FBE3031B719FD300C73E08 /* JKFacebookPrideEffect.h */,
+				38FBE3041B719FD300C73E08 /* JKFacebookPrideEffect.m */,
+			);
+			name = "Main Source";
+			sourceTree = "<group>";
+		};
+		38FBE30A1B71A1D500C73E08 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				38FBE30E1B71A22A00C73E08 /* Constants.h */,
+				38FBE30B1B71A1E400C73E08 /* UIImage+toGrayScale.h */,
+				38FBE30C1B71A1E400C73E08 /* UIImage+toGrayScale.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		38FBE3111B71A31800C73E08 /* Sample Images */ = {
+			isa = PBXGroup;
+			children = (
+				38FBE3121B71A32300C73E08 /* sohini_patil.jpg */,
+			);
+			name = "Sample Images";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,6 +256,7 @@
 			files = (
 				38FBE2E81B719F1F00C73E08 /* Main.storyboard in Resources */,
 				38FBE2ED1B719F1F00C73E08 /* LaunchScreen.xib in Resources */,
+				38FBE3131B71A32300C73E08 /* sohini_patil.jpg in Resources */,
 				38FBE2EA1B719F1F00C73E08 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,7 +276,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				38FBE2E51B719F1F00C73E08 /* ViewController.m in Sources */,
+				38FBE30D1B71A1E400C73E08 /* UIImage+toGrayScale.m in Sources */,
 				38FBE2E21B719F1F00C73E08 /* AppDelegate.m in Sources */,
+				38FBE3051B719FD300C73E08 /* JKFacebookPrideEffect.m in Sources */,
 				38FBE2DF1B719F1F00C73E08 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,6 +408,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = JKFacebookPrideEffect/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -360,6 +419,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = JKFacebookPrideEffect/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
