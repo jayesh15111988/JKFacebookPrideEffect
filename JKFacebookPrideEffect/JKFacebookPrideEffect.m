@@ -19,7 +19,7 @@
     NSInteger numberOfColors = 6;
     
     UIImage* grayScaleImage = [inputImage toGrayscale];
-    UIImageView* outputImageView = [[UIImageView alloc] initWithFrame:CGRectMake(44, 44, 300, 250)];
+    UIImageView* outputImageView = [[UIImageView alloc] initWithFrame:CGRectMake(50, 100, 300, 250)];
     outputImageView.contentMode = UIViewContentModeScaleAspectFit;
     outputImageView.image = grayScaleImage;
     outputImageView.clipsToBounds = YES;
@@ -30,9 +30,6 @@
     overlayContainerView.clipsToBounds = YES;
     overlayContainerView.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.5];
     
-    CGFloat xOffsetForTransformedImageView = outputImageView.frame.origin.x;
-    CGFloat yOffsetForTransformedImageView = outputImageView.frame.origin.y;
-    
     CGFloat heightForEachLayer = outputImageView.frame.size.height / numberOfColors;
     CGFloat widthForEachLayer = outputImageView.frame.size.width / numberOfColors;
     CGFloat diagonalLength = (sqrt(pow(outputImageView.frame.size.height, 2) + pow(outputImageView.frame.size.width, 2)));
@@ -40,6 +37,15 @@
     
     CGFloat angle = atan(outputImageView.frame.size.height/outputImageView.frame.size.width);
     CGFloat initialValueAlongDiameter = individualDiagonalBarWidth/2.0;
+    CGFloat dimensionsRatio = outputImageView.frame.size.height/outputImageView.frame.size.width;
+    
+    if (outputImageView.frame.size.height < outputImageView.frame.size.width) {
+        dimensionsRatio = outputImageView.frame.size.width/outputImageView.frame.size.height;
+    }
+    
+    [outputImageView addSubview:overlayContainerView];
+    [outputImageView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[overlayContainerView]|" options:kNilOptions metrics:@{@"width": @(outputImageView.frame.size.width)} views:NSDictionaryOfVariableBindings(overlayContainerView)]];
+    [outputImageView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[overlayContainerView]|" options:kNilOptions metrics:@{@"height": @(outputImageView.frame.size.height)} views:NSDictionaryOfVariableBindings(overlayContainerView)]];
     
     for (NSInteger i = 0; i < numberOfColors; i++) {
         
@@ -49,7 +55,7 @@
         } else if (prideEffect == PrideEffectVertical) {
             overlayFrame = CGRectMake((i * widthForEachLayer), 0, widthForEachLayer, outputImageView.frame.size.height);
         } else {
-            overlayFrame = CGRectMake((i * individualDiagonalBarWidth) + outputImageView.frame.origin.x, outputImageView.frame.origin.y - yOffsetForTransformedImageView, diagonalLength, individualDiagonalBarWidth);
+            overlayFrame = CGRectMake((i * individualDiagonalBarWidth) + outputImageView.frame.origin.x, outputImageView.frame.origin.y, dimensionsRatio * diagonalLength, individualDiagonalBarWidth);
         }
         
         UIView *overlay = [[UIView alloc] initWithFrame:overlayFrame];
@@ -65,10 +71,6 @@
         }
         [overlayContainerView addSubview:overlay];
     }
-    
-    [outputImageView addSubview:overlayContainerView];
-    [outputImageView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-hPadding-[overlayContainerView]|" options:kNilOptions metrics:@{@"width": @(outputImageView.frame.size.width), @"hPadding": @(0)} views:NSDictionaryOfVariableBindings(overlayContainerView)]];
-    [outputImageView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-vPadding-[overlayContainerView]|" options:kNilOptions metrics:@{@"height": @(outputImageView.frame.size.height), @"vPadding": @(0)} views:NSDictionaryOfVariableBindings(overlayContainerView)]];
     return outputImageView;
 }
 
