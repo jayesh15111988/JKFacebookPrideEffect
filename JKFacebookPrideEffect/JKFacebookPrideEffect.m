@@ -22,12 +22,12 @@
     UIImageView* outputImageView = [[UIImageView alloc] initWithFrame:CGRectMake(50, 100, 300, 250)];
     outputImageView.contentMode = UIViewContentModeScaleAspectFit;
     outputImageView.image = grayScaleImage;
-    outputImageView.clipsToBounds = YES;
+    outputImageView.clipsToBounds = NO;
     [outputImageView setFrame:AVMakeRectWithAspectRatioInsideRect(inputImage.size, outputImageView.frame)];
     
     UIView* overlayContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, outputImageView.frame.size.width, outputImageView.frame.size.height)];
     overlayContainerView.translatesAutoresizingMaskIntoConstraints = NO;
-    overlayContainerView.clipsToBounds = YES;
+    overlayContainerView.clipsToBounds = NO;
     overlayContainerView.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.5];
     
     CGFloat heightForEachLayer = outputImageView.frame.size.height / numberOfColors;
@@ -35,13 +35,17 @@
     CGFloat diagonalLength = (sqrt(pow(outputImageView.frame.size.height, 2) + pow(outputImageView.frame.size.width, 2)));
     CGFloat individualDiagonalBarWidth = diagonalLength/numberOfColors;
     
-    CGFloat angle = atan(outputImageView.frame.size.height/outputImageView.frame.size.width);
+    CGFloat angle =  atan(outputImageView.frame.size.height/outputImageView.frame.size.width);
     CGFloat initialValueAlongDiameter = individualDiagonalBarWidth/2.0;
     CGFloat dimensionsRatio = outputImageView.frame.size.height/outputImageView.frame.size.width;
+    NSLog(@"Total diagonal lenth %f", diagonalLength);
+    NSLog(@"Individual diagonal bar width %f", individualDiagonalBarWidth);
     
     if (outputImageView.frame.size.height < outputImageView.frame.size.width) {
         dimensionsRatio = outputImageView.frame.size.width/outputImageView.frame.size.height;
     }
+    
+    dimensionsRatio = 1.0;
     
     [outputImageView addSubview:overlayContainerView];
     [outputImageView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[overlayContainerView]|" options:kNilOptions metrics:@{@"width": @(outputImageView.frame.size.width)} views:NSDictionaryOfVariableBindings(overlayContainerView)]];
@@ -68,6 +72,7 @@
             overlay.center = CGPointMake(xCenterForCurrentBar, (initialValueAlongDiameter * sin(angle)));
             overlay.transform = CGAffineTransformMakeRotation(multiplyingFactorForBarTransform * angle);
             initialValueAlongDiameter += individualDiagonalBarWidth;
+            NSLog(@"UPdated value laong diagonal %f", initialValueAlongDiameter);
         }
         [overlayContainerView addSubview:overlay];
     }

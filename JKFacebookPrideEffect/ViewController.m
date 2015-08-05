@@ -19,12 +19,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIImage* inputImage = [UIImage imageNamed:@"hRect"];
-    UIImageView* outputImageView = [JKFacebookPrideEffect applyEffectToInputImage:inputImage andEffectType:PrideEffectPositiveDiagonal andTextRequired:NO];
+//    UIImage* inputImage = [UIImage imageNamed:@"vRect"];
+//    UIImageView* outputImageView = [JKFacebookPrideEffect applyEffectToInputImage:inputImage andEffectType:PrideEffectPositiveDiagonal andTextRequired:NO];
 //    outputImageView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.view addSubview:outputImageView];
-//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[outputImageView]|" options:kNilOptions metrics:nil views:NSDictionaryOfVariableBindings(outputImageView)]];
-//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[outputImageView(300)]" options:kNilOptions metrics:nil views:NSDictionaryOfVariableBindings(outputImageView)]];
+//    outputImageView.contentMode = UIViewContentModeScaleAspectFit;
+//    
+//    [self.view addSubview:outputImageView];
+//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-50-[outputImageView(width)]" options:kNilOptions metrics:@{@"width": @(outputImageView.frame.size.width)} views:NSDictionaryOfVariableBindings(outputImageView)]];
+//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-64-[outputImageView(height)]" options:kNilOptions metrics:@{@"height": @(outputImageView.frame.size.height)} views:NSDictionaryOfVariableBindings(outputImageView)]];
 
 //    UIImageView* im = [[UIImageView alloc] initWithFrame:CGRectMake(50, 50, 300, 200)];
 //    im.contentMode = UIViewContentModeScaleAspectFit;
