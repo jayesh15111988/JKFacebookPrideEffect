@@ -13,7 +13,7 @@ typedef enum : NSUInteger {
     PrideEffectHorizontal,
     PrideEffectVertical,
     PrideEffectPositiveDiagonal,
-    PrideEffectVerticalDiagonal
+    PrideEffectNegativeDiagonal
 } PrideEffect;
 
 @interface JKFacebookPrideEffect : NSObject

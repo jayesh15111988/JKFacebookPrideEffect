@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     UIImage* inputImage = [UIImage imageNamed:@"sohini_patil.jpg"];
-    UIImageView* outputImageView = [JKFacebookPrideEffect applyEffectToInputImage:inputImage andEffectType:PrideEffectHorizontal andTextRequired:NO];
+    UIImageView* outputImageView = [JKFacebookPrideEffect applyEffectToInputImage:inputImage andEffectType:PrideEffectNegativeDiagonal andTextRequired:NO];
 //    outputImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:outputImageView];
 //    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[outputImageView]|" options:kNilOptions metrics:nil views:NSDictionaryOfVariableBindings(outputImageView)]];
