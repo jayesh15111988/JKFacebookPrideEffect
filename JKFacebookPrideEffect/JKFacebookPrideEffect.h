@@ -20,7 +20,10 @@ typedef enum : NSUInteger {
 
 @property (assign, nonatomic) PrideEffect prideEffect;
 @property (assign, nonatomic) BOOL textRequired;
-@property (assign, nonatomic) CGFloat overlayAlpha;
+@property (assign, nonatomic) NSTextAlignment overlayTextAlignment;
+@property (strong, nonatomic) UIFont* overlayTextFont;
+@property (strong, nonatomic) UIColor* overlayTextColor;
+@property (assign, nonatomic) BOOL variableTextColors;
 
 - (instancetype)initWithInputImage:(UIImage *)inputImage andSize:(CGSize)size;
 - (UIImageView*)applyEffect;

@@ -11,6 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface ViewController ()
+
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewSample;
 
 @end
@@ -21,7 +22,9 @@
     [super viewDidLoad];
     UIImage* inputImage = [UIImage imageNamed:@"sohini_patil.jpg"];
     JKFacebookPrideEffect* prideEffectApplier = [[JKFacebookPrideEffect alloc] initWithInputImage:inputImage andSize:CGSizeMake(300, 300)];
-    prideEffectApplier.prideEffect = PrideEffectVertical;
+    prideEffectApplier.prideEffect = PrideEffectPositiveDiagonal;
+    prideEffectApplier.textRequired = YES;
+    prideEffectApplier.variableTextColors = NO;
     UIImageView* outputImageView = [prideEffectApplier applyEffect];
     outputImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:outputImageView];

@@ -15,16 +15,20 @@
 
 @property (strong, nonatomic) UIImageView* outputImageView;
 @property (assign, nonatomic) CGSize outputImageViewSize;
+@property (assign, nonatomic) CGFloat overlayAlpha;
 
 @end
 
 @implementation JKFacebookPrideEffect
 
 static NSArray* gayPrideColorsCollection;
+static NSArray* colorLabelTexts;
 static NSInteger numberOfColors;
 
 + (void)load {
     gayPrideColorsCollection = @[UIColorFromRGB(0xFF0000), UIColorFromRGB(0xFBA71C), UIColorFromRGB(0xFFFF01), UIColorFromRGB(0x30CA6A), UIColorFromRGB(0x057BB2), UIColorFromRGB(0x4C2D7B)];
+    // Ref : https://en.wikipedia.org/wiki/Rainbow_flag_(LGBT_movement)
+    colorLabelTexts = @[@"LIFE", @"HEALING", @"SUNLIGHT", @"NATURE", @"HARMONY", @"SPIRIT"];
     numberOfColors = 6;
     NSAssert([gayPrideColorsCollection count] == numberOfColors, @"Number of colors should match the size of array holding successive color values");
     NSAssert(numberOfColors > 0, @"You must supply at least one color value");
@@ -42,7 +46,10 @@ static NSInteger numberOfColors;
             _outputImageViewSize = size;
         _prideEffect = PrideEffectHorizontal;
         _textRequired = NO;
-        _overlayAlpha = 0.6;
+        _overlayTextAlignment = NSTextAlignmentCenter;
+        _overlayTextFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.0];
+        _overlayTextColor = [UIColor whiteColor];
+        _variableTextColors = YES;
     }
     return self;
 }
@@ -75,8 +82,20 @@ static NSInteger numberOfColors;
         }
         UIView *overlay = [[UIView alloc] initWithFrame:overlayFrame];
         [overlay setBackgroundColor:gayPrideColorsCollection[i]];
-        overlay.alpha = _overlayAlpha;
         [overlayContainerView addSubview:overlay];
+        
+        if (_textRequired) {
+            UILabel* overlayTextLabel = [UILabel new];
+            overlayTextLabel.translatesAutoresizingMaskIntoConstraints = NO;
+            overlayTextLabel.text = colorLabelTexts[i];
+            overlayTextLabel.textColor = _variableTextColors ? [gayPrideColorsCollection[i] colorWithAlphaComponent:1.0] : _overlayTextColor;
+            overlayTextLabel.numberOfLines = 0;
+            overlayTextLabel.font = _overlayTextFont;
+            overlayTextLabel.textAlignment = _overlayTextAlignment;
+            [_outputImageView addSubview:overlayTextLabel];
+            [_outputImageView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[overlayTextLabel]|" options:kNilOptions metrics:nil views:NSDictionaryOfVariableBindings(overlayTextLabel)]];
+            [_outputImageView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-verticalSpacing-[overlayTextLabel(labelHeight)]" options:kNilOptions metrics:@{@"verticalSpacing": @(i * heightForEachColorBar),@"labelHeight": @(heightForEachColorBar)} views:NSDictionaryOfVariableBindings(overlayTextLabel)]];
+        }
     }
     
     [_outputImageView addSubview:overlayContainerView];
