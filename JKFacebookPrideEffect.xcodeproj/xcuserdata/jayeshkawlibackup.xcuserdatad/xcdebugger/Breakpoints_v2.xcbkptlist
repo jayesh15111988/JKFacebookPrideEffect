@@ -10,28 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JKFacebookPrideEffect/JKFacebookPrideEffect.m"
-            timestampString = "460435941.175046"
+            timestampString = "460517080.526641"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "+applyEffectToInputImage:andEffectType:andTextRequired:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JKFacebookPrideEffect/JKFacebookPrideEffect.m"
-            timestampString = "460515674.140307"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "+applyEffectToInputImage:andEffectType:andTextRequired:"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "-initWithInputImage:andSize:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,44 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JKFacebookPrideEffect/JKFacebookPrideEffect.m"
-            timestampString = "460514392.25659"
+            timestampString = "460517080.526641"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "+applyEffectToInputImage:andEffectType:andTextRequired:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JKFacebookPrideEffect/JKFacebookPrideEffect.m"
-            timestampString = "460515674.140307"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
-            landmarkName = "+applyEffectToInputImage:andEffectType:andTextRequired:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JKFacebookPrideEffect/JKFacebookPrideEffect.m"
-            timestampString = "460515674.140307"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "+applyEffectToInputImage:andEffectType:andTextRequired:"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "-initWithInputImage:andSize:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

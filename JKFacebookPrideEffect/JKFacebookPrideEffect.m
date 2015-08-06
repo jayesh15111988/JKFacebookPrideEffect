@@ -11,65 +11,81 @@
 #import "UIImage+toGrayScale.h"
 #import "Constants.h"
 
+@interface JKFacebookPrideEffect ()
+
+@property (strong, nonatomic) UIImageView* outputImageView;
+@property (assign, nonatomic) CGSize outputImageViewSize;
+
+@end
+
 @implementation JKFacebookPrideEffect
 
-+ (UIImageView*)applyEffectToInputImage:(UIImage *)inputImage andEffectType:(PrideEffect)prideEffect andTextRequired:(BOOL)textRequired {
+static NSArray* gayPrideColorsCollection;
+static NSInteger numberOfColors;
+
++ (void)load {
+    gayPrideColorsCollection = @[UIColorFromRGB(0xFF0000), UIColorFromRGB(0xFBA71C), UIColorFromRGB(0xFFFF01), UIColorFromRGB(0x30CA6A), UIColorFromRGB(0x057BB2), UIColorFromRGB(0x4C2D7B)];
+    numberOfColors = 6;
+    NSAssert([gayPrideColorsCollection count] == numberOfColors, @"Number of colors should match the size of array holding successive color values");
+    NSAssert(numberOfColors > 0, @"You must supply at least one color value");
+}
+
+- (instancetype)initWithInputImage:(UIImage *)inputImage andSize:(CGSize)size {
     
-    NSArray* gayPrideColorsCollection = @[UIColorFromRGB(0xFF0000), UIColorFromRGB(0xFBA71C), UIColorFromRGB(0xFFFF01), UIColorFromRGB(0x30CA6A), UIColorFromRGB(0x057BB2), UIColorFromRGB(0x4C2D7B)];
-    NSInteger numberOfColors = 6;
+    if (self = [super init]) {
+        UIImage* grayScaleImage = [inputImage toGrayscale];
+        _outputImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+        _outputImageView.contentMode = UIViewContentModeScaleAspectFit;
+        _outputImageView.image = grayScaleImage;
+        _outputImageView.clipsToBounds = YES;
+        [_outputImageView setFrame:AVMakeRectWithAspectRatioInsideRect(inputImage.size, _outputImageView.frame)];
+            _outputImageViewSize = size;
+        _prideEffect = PrideEffectHorizontal;
+        _textRequired = NO;
+        _overlayAlpha = 0.6;
+    }
+    return self;
+}
+
+- (UIImageView*)applyEffect {
+    CGFloat heightForEachColorBar = _outputImageView.frame.size.height / numberOfColors;
+    CGFloat widthForEachColorBar = _outputImageView.frame.size.width / numberOfColors;
+    CGFloat diagonalLength = (sqrt(pow(_outputImageView.frame.size.height, 2) + pow(_outputImageView.frame.size.width, 2)));
+    CGFloat individualDiagonalBarWidth = diagonalLength / numberOfColors;
     
-    UIImage* grayScaleImage = [inputImage toGrayscale];
-    UIImageView* outputImageView = [[UIImageView alloc] initWithFrame:CGRectMake(50, 100, 300, 250)];
-    outputImageView.contentMode = UIViewContentModeScaleAspectFit;
-    outputImageView.image = grayScaleImage;
-    outputImageView.clipsToBounds = YES;
-    [outputImageView setFrame:AVMakeRectWithAspectRatioInsideRect(inputImage.size, outputImageView.frame)];
-    
-    CGFloat heightForEachLayer = outputImageView.frame.size.height / numberOfColors;
-    CGFloat widthForEachLayer = outputImageView.frame.size.width / numberOfColors;
-    CGFloat diagonalLength = (sqrt(pow(outputImageView.frame.size.height, 2) + pow(outputImageView.frame.size.width, 2)));
-    CGFloat individualDiagonalBarWidth = diagonalLength/numberOfColors;
-    
-    
-    CGFloat angle =  atan(outputImageView.frame.size.height/outputImageView.frame.size.width);
-    
+    CGFloat diagonalAngle =  atan(_outputImageView.frame.size.height / _outputImageView.frame.size.width);
     UIView* overlayContainerView = [[UIView alloc] init];
     overlayContainerView.clipsToBounds = YES;
-    overlayContainerView.backgroundColor = [UIColor colorWithWhite:0.5 alpha:0.5];
     
-    if (prideEffect == PrideEffectPositiveDiagonal || prideEffect == PrideEffectNegativeDiagonal) {
+    if (_prideEffect == PrideEffectPositiveDiagonal || _prideEffect == PrideEffectNegativeDiagonal) {
         overlayContainerView.frame = CGRectMake(0, 0, diagonalLength, diagonalLength);
-        overlayContainerView.center = CGPointMake(CGRectGetWidth(outputImageView.frame)/2, CGRectGetHeight(outputImageView.frame)/2);
+        overlayContainerView.center = CGPointMake(CGRectGetWidth(_outputImageView.frame)/2, CGRectGetHeight(_outputImageView.frame)/2);
     } else {
-        overlayContainerView.frame = CGRectMake(0, 0, outputImageView.frame.size.width, outputImageView.frame.size.height);
+        overlayContainerView.frame = CGRectMake(0, 0, _outputImageView.frame.size.width, _outputImageView.frame.size.height);
     }
     
-    [outputImageView addSubview:overlayContainerView];
-
-    
     for (NSInteger i = 0; i < numberOfColors; i++) {
-        
         CGRect overlayFrame;
-        if (prideEffect == PrideEffectHorizontal) {
-            overlayFrame = CGRectMake(0, i * heightForEachLayer, outputImageView.frame.size.width, heightForEachLayer);
-        } else if (prideEffect == PrideEffectVertical) {
-            overlayFrame = CGRectMake((i * widthForEachLayer), 0, widthForEachLayer, outputImageView.frame.size.height);
+        if (_prideEffect == PrideEffectHorizontal) {
+            overlayFrame = CGRectMake(0, i * heightForEachColorBar, _outputImageView.frame.size.width, heightForEachColorBar);
+        } else if (_prideEffect == PrideEffectVertical) {
+            overlayFrame = CGRectMake((i * widthForEachColorBar), 0, widthForEachColorBar, _outputImageView.frame.size.height);
         } else {
             overlayFrame = CGRectMake(0, i * individualDiagonalBarWidth, diagonalLength, individualDiagonalBarWidth);
         }
-        
         UIView *overlay = [[UIView alloc] initWithFrame:overlayFrame];
         [overlay setBackgroundColor:gayPrideColorsCollection[i]];
-        overlay.alpha = 0.5;
+        overlay.alpha = _overlayAlpha;
         [overlayContainerView addSubview:overlay];
     }
-    if (prideEffect == PrideEffectPositiveDiagonal) {
-        overlayContainerView.transform = CGAffineTransformMakeRotation(-angle);
-    } else if(prideEffect == PrideEffectNegativeDiagonal) {
-        overlayContainerView.transform = CGAffineTransformMakeRotation(angle);
-    }
     
-    return outputImageView;
+    [_outputImageView addSubview:overlayContainerView];
+    if (_prideEffect == PrideEffectPositiveDiagonal) {
+        overlayContainerView.transform = CGAffineTransformMakeRotation(-diagonalAngle);
+    } else if(_prideEffect == PrideEffectNegativeDiagonal) {
+        overlayContainerView.transform = CGAffineTransformMakeRotation(diagonalAngle);
+    }
+    return _outputImageView;
 }
 
 @end

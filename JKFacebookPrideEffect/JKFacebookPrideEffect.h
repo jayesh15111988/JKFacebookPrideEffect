@@ -18,7 +18,12 @@ typedef enum : NSUInteger {
 
 @interface JKFacebookPrideEffect : NSObject
 
-+ (UIImageView*)applyEffectToInputImage:(UIImage *)inputImage andEffectType:(PrideEffect)prideEffect andTextRequired:(BOOL)textRequired;
+@property (assign, nonatomic) PrideEffect prideEffect;
+@property (assign, nonatomic) BOOL textRequired;
+@property (assign, nonatomic) CGFloat overlayAlpha;
+
+- (instancetype)initWithInputImage:(UIImage *)inputImage andSize:(CGSize)size;
+- (UIImageView*)applyEffect;
 
 
 @end
