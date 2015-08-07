@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JKFacebookPrideEffect/JKFacebookPrideEffect.m"
-            timestampString = "460605713.065121"
+            timestampString = "460606903.81413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "-applyEffect"
             landmarkType = "5">
          </BreakpointContent>

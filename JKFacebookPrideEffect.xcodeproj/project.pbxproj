@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3829AAB71B744E8300C02CAA /* sc.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3829AAB61B744E8300C02CAA /* sc.jpg */; };
 		38FBE2DF1B719F1F00C73E08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBE2DE1B719F1F00C73E08 /* main.m */; };
 		38FBE2E21B719F1F00C73E08 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBE2E11B719F1F00C73E08 /* AppDelegate.m */; };
 		38FBE2E51B719F1F00C73E08 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBE2E41B719F1F00C73E08 /* ViewController.m */; };
@@ -18,7 +19,6 @@
 		38FBE3071B719FFB00C73E08 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38FBE3061B719FFB00C73E08 /* UIKit.framework */; };
 		38FBE30D1B71A1E400C73E08 /* UIImage+toGrayScale.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBE30C1B71A1E400C73E08 /* UIImage+toGrayScale.m */; };
 		38FBE3101B71A29D00C73E08 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38FBE30F1B71A29D00C73E08 /* AVFoundation.framework */; };
-		38FBE3131B71A32300C73E08 /* sohini_patil.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 38FBE3121B71A32300C73E08 /* sohini_patil.jpg */; };
 		38FBE3161B71B32100C73E08 /* vRect.png in Resources */ = {isa = PBXBuildFile; fileRef = 38FBE3141B71B32100C73E08 /* vRect.png */; };
 		38FBE3171B71B32100C73E08 /* hRect.png in Resources */ = {isa = PBXBuildFile; fileRef = 38FBE3151B71B32100C73E08 /* hRect.png */; };
 		38FBE3191B71B52C00C73E08 /* parade.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 38FBE3181B71B52C00C73E08 /* parade.jpg */; };
@@ -35,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3829AAB61B744E8300C02CAA /* sc.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sc.jpg; sourceTree = "<group>"; };
 		38FBE2D91B719F1F00C73E08 /* JKFacebookPrideEffect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JKFacebookPrideEffect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38FBE2DD1B719F1F00C73E08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38FBE2DE1B719F1F00C73E08 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -55,7 +56,6 @@
 		38FBE30C1B71A1E400C73E08 /* UIImage+toGrayScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+toGrayScale.m"; sourceTree = "<group>"; };
 		38FBE30E1B71A22A00C73E08 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		38FBE30F1B71A29D00C73E08 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		38FBE3121B71A32300C73E08 /* sohini_patil.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sohini_patil.jpg; sourceTree = "<group>"; };
 		38FBE3141B71B32100C73E08 /* vRect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vRect.png; sourceTree = "<group>"; };
 		38FBE3151B71B32100C73E08 /* hRect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hRect.png; sourceTree = "<group>"; };
 		38FBE3181B71B52C00C73E08 /* parade.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = parade.jpg; sourceTree = "<group>"; };
@@ -176,9 +176,9 @@
 			isa = PBXGroup;
 			children = (
 				38FBE3181B71B52C00C73E08 /* parade.jpg */,
+				3829AAB61B744E8300C02CAA /* sc.jpg */,
 				38FBE3141B71B32100C73E08 /* vRect.png */,
 				38FBE3151B71B32100C73E08 /* hRect.png */,
-				38FBE3121B71A32300C73E08 /* sohini_patil.jpg */,
 			);
 			name = "Sample Images";
 			sourceTree = "<group>";
@@ -267,9 +267,9 @@
 				38FBE2ED1B719F1F00C73E08 /* LaunchScreen.xib in Resources */,
 				38FBE3171B71B32100C73E08 /* hRect.png in Resources */,
 				38FBE3191B71B52C00C73E08 /* parade.jpg in Resources */,
-				38FBE3131B71A32300C73E08 /* sohini_patil.jpg in Resources */,
 				38FBE3161B71B32100C73E08 /* vRect.png in Resources */,
 				38FBE2EA1B719F1F00C73E08 /* Images.xcassets in Resources */,
+				3829AAB71B744E8300C02CAA /* sc.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -490,6 +490,7 @@
 				38FBE2FE1B719F1F00C73E08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		38FBE2FF1B719F1F00C73E08 /* Build configuration list for PBXNativeTarget "JKFacebookPrideEffectTests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +499,7 @@
 				38FBE3011B719F1F00C73E08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -19,11 +19,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wJ8-im-GQR">
-                                <rect key="frame" x="0.0" y="46" width="320" height="300"/>
+                                <rect key="frame" x="0.0" y="46" width="320" height="434"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="6LR-O3-aaZ"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="6LR-O3-aaZ"/>
+                                    </mask>
+                                </variation>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -31,6 +36,7 @@
                             <constraint firstItem="wJ8-im-GQR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="26" id="FCm-sc-cQJ"/>
                             <constraint firstItem="wJ8-im-GQR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="T2B-Wb-T8s"/>
                             <constraint firstItem="wJ8-im-GQR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="aeq-Gp-x0H"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="wJ8-im-GQR" secondAttribute="bottom" id="guQ-BW-uHe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wJ8-im-GQR" secondAttribute="trailing" constant="-16" id="haz-Lz-pEW"/>
                         </constraints>
                     </view>

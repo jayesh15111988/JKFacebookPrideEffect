@@ -88,10 +88,8 @@ static NSInteger numberOfColors;
         
         if (_textRequired) {
             CATextLayer* overlayTextLayer = [CATextLayer new];
-            overlayTextLayer.frame = CGRectMake(0, 0, _outputImageView.frame.size.width - 20, heightForEachColorBar);
+            overlayTextLayer.frame = CGRectMake(10, (i * heightForEachColorBar) + (heightForEachColorBar - 22) / 2.0, _outputImageView.frame.size.width - 20, 22);
             //overlayTextLayer.backgroundColor = [UIColor blackColor].CGColor;
-            overlayTextLayer.anchorPoint = CGPointMake(0.5, 0.5);
-            overlayTextLayer.position = (CGPoint){overlayContainerView.center.x, (i * heightForEachColorBar) + (heightForEachColorBar * 0.75)};
             overlayTextLayer.string = colorLabelTexts[i];
             overlayTextLayer.foregroundColor = _variableTextColors ? [gayPrideColorsCollection[i] colorWithAlphaComponent:1.0].CGColor : _overlayTextColor.CGColor;
             [overlayTextLayer setFont:(__bridge CFTypeRef)(_overlayTextFont.fontName)];
