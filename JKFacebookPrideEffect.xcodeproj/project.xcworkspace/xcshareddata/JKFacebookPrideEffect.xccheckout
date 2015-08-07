@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3B9D45AE-EF63-47AE-9CE3-B8B2E3F90383</string>
+	<key>IDESourceControlProjectName</key>
+	<string>project</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1318D45758928B911477ACF4FF7955C2FE7FDB0C</key>
+		<string>github.com:jayesh15111988/JKFacebookPrideEffect.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>JKFacebookPrideEffect.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1318D45758928B911477ACF4FF7955C2FE7FDB0C</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:jayesh15111988/JKFacebookPrideEffect.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1318D45758928B911477ACF4FF7955C2FE7FDB0C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1318D45758928B911477ACF4FF7955C2FE7FDB0C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>JKFacebookPrideEffect</string>
+		</dict>
+	</array>
+</dict>
+</plist>

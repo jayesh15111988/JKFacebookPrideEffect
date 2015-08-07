@@ -21,6 +21,7 @@
 
 @implementation JKFacebookPrideEffect
 
+const NSTextAlignment NSTextAlignmentAlternate = 7;
 static NSArray* gayPrideColorsCollection;
 static NSArray* colorLabelTexts;
 static NSInteger numberOfColors;
@@ -47,14 +48,14 @@ static NSInteger numberOfColors;
         _prideEffect = PrideEffectHorizontal;
         _textRequired = NO;
         _overlayTextAlignment = NSTextAlignmentCenter;
-        _overlayTextFont = [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.0];
-        _overlayTextColor = [UIColor whiteColor];
+        _overlayTextFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0];
+        _overlayTextColor = [UIColor colorWithWhite:1.0 alpha:0.8];
         _variableTextColors = YES;
     }
     return self;
 }
 
-- (UIImageView*)applyEffect {
+- (UIImage*)applyEffect {
     CGFloat heightForEachColorBar = _outputImageView.frame.size.height / numberOfColors;
     CGFloat widthForEachColorBar = _outputImageView.frame.size.width / numberOfColors;
     CGFloat diagonalLength = (sqrt(pow(_outputImageView.frame.size.height, 2) + pow(_outputImageView.frame.size.width, 2)));
@@ -85,17 +86,25 @@ static NSInteger numberOfColors;
         [overlayContainerView addSubview:overlay];
         
         if (_textRequired) {
-            UILabel* overlayTextLabel = [UILabel new];
-            overlayTextLabel.translatesAutoresizingMaskIntoConstraints = NO;
-            overlayTextLabel.text = colorLabelTexts[i];
-            overlayTextLabel.textColor = _variableTextColors ? [gayPrideColorsCollection[i] colorWithAlphaComponent:1.0] : _overlayTextColor;
-            overlayTextLabel.numberOfLines = 0;
-            overlayTextLabel.font = _overlayTextFont;
-            overlayTextLabel.textAlignment = _overlayTextAlignment;
-            [_outputImageView addSubview:overlayTextLabel];
-            [_outputImageView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[overlayTextLabel]|" options:kNilOptions metrics:nil views:NSDictionaryOfVariableBindings(overlayTextLabel)]];
-            [_outputImageView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-verticalSpacing-[overlayTextLabel(labelHeight)]" options:kNilOptions metrics:@{@"verticalSpacing": @(i * heightForEachColorBar),@"labelHeight": @(heightForEachColorBar)} views:NSDictionaryOfVariableBindings(overlayTextLabel)]];
-        }
+            CATextLayer* overlayTextLayer = [CATextLayer new];
+            overlayTextLayer.frame = CGRectMake(0, 0, overlay.frame.size.width - 20, 20);
+            overlayTextLayer.anchorPoint = CGPointMake(0.5, 0.5);
+            overlayTextLayer.position = (CGPoint){CGRectGetMidX(overlay.bounds), CGRectGetMidY(overlay.bounds)};
+            overlayTextLayer.string = colorLabelTexts[i];
+            overlayTextLayer.foregroundColor = _variableTextColors ? [gayPrideColorsCollection[i] colorWithAlphaComponent:1.0].CGColor : _overlayTextColor.CGColor;
+            [overlayTextLayer setFont:(__bridge CFTypeRef)(_overlayTextFont.fontName)];
+            [overlayTextLayer setFontSize:_overlayTextFont.pointSize];
+            if (self.overlayTextAlignment == NSTextAlignmentAlternate) {
+                if (i % 2 == 0) {
+                    overlayTextLayer.alignmentMode = kCAAlignmentLeft;
+                } else {
+                    overlayTextLayer.alignmentMode = kCAAlignmentRight;
+                }
+            } else {
+                overlayTextLayer.alignmentMode = [self layerAlignmentFromViewAlignment:self.overlayTextAlignment];
+            }
+            [overlay.layer addSublayer:overlayTextLayer];
+       }
     }
     
     [_outputImageView addSubview:overlayContainerView];
@@ -104,7 +113,31 @@ static NSInteger numberOfColors;
     } else if(_prideEffect == PrideEffectNegativeDiagonal) {
         overlayContainerView.transform = CGAffineTransformMakeRotation(diagonalAngle);
     }
-    return _outputImageView;
+    
+    CGRect rect = [_outputImageView bounds];
+    UIGraphicsBeginImageContextWithOptions(rect.size, YES, 0.0f);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [_outputImageView.layer renderInContext:context];
+    UIImage* capturedImageWithPrideEffect = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return capturedImageWithPrideEffect;
+}
+
+- (NSString*)layerAlignmentFromViewAlignment:(NSTextAlignment)alignment {
+    switch (alignment) {
+        case NSTextAlignmentCenter:
+            return kCAAlignmentCenter;
+            break;
+        case NSTextAlignmentLeft:
+            return kCAAlignmentLeft;
+            break;
+        case NSTextAlignmentRight:
+            return kCAAlignmentRight;
+        default:
+            break;
+    }
+    return kCAAlignmentCenter;
 }
 
 @end

@@ -16,6 +16,8 @@ typedef enum : NSUInteger {
     PrideEffectNegativeDiagonal
 } PrideEffect;
 
+extern const NSTextAlignment NSTextAlignmentAlternate;
+
 @interface JKFacebookPrideEffect : NSObject
 
 @property (assign, nonatomic) PrideEffect prideEffect;
@@ -26,7 +28,7 @@ typedef enum : NSUInteger {
 @property (assign, nonatomic) BOOL variableTextColors;
 
 - (instancetype)initWithInputImage:(UIImage *)inputImage andSize:(CGSize)size;
-- (UIImageView*)applyEffect;
+- (UIImage*)applyEffect;
 
 
 @end
