@@ -83,13 +83,15 @@ static NSInteger numberOfColors;
         }
         UIView *overlay = [[UIView alloc] initWithFrame:overlayFrame];
         [overlay setBackgroundColor:gayPrideColorsCollection[i]];
+        overlay.clipsToBounds = NO;
         [overlayContainerView addSubview:overlay];
         
         if (_textRequired) {
             CATextLayer* overlayTextLayer = [CATextLayer new];
-            overlayTextLayer.frame = CGRectMake(0, 0, overlay.frame.size.width - 20, 20);
+            overlayTextLayer.frame = CGRectMake(0, 0, _outputImageView.frame.size.width - 20, heightForEachColorBar);
+            //overlayTextLayer.backgroundColor = [UIColor blackColor].CGColor;
             overlayTextLayer.anchorPoint = CGPointMake(0.5, 0.5);
-            overlayTextLayer.position = (CGPoint){CGRectGetMidX(overlay.bounds), CGRectGetMidY(overlay.bounds)};
+            overlayTextLayer.position = (CGPoint){overlayContainerView.center.x, (i * heightForEachColorBar) + (heightForEachColorBar * 0.75)};
             overlayTextLayer.string = colorLabelTexts[i];
             overlayTextLayer.foregroundColor = _variableTextColors ? [gayPrideColorsCollection[i] colorWithAlphaComponent:1.0].CGColor : _overlayTextColor.CGColor;
             [overlayTextLayer setFont:(__bridge CFTypeRef)(_overlayTextFont.fontName)];
@@ -103,7 +105,7 @@ static NSInteger numberOfColors;
             } else {
                 overlayTextLayer.alignmentMode = [self layerAlignmentFromViewAlignment:self.overlayTextAlignment];
             }
-            [overlay.layer addSublayer:overlayTextLayer];
+            [overlayContainerView.layer addSublayer:overlayTextLayer];
        }
     }
     

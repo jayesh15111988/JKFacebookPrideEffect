@@ -25,7 +25,7 @@
     prideEffectApplier.prideEffect = PrideEffectHorizontal;
     prideEffectApplier.textRequired = YES;
     prideEffectApplier.variableTextColors = NO;
-    prideEffectApplier.overlayTextAlignment = NSTextAlignmentAlternate;
+    prideEffectApplier.overlayTextAlignment = NSTextAlignmentLeft;
     UIImage* gayProudImage = [prideEffectApplier applyEffect];
     self.imageViewSample.image = gayProudImage;
 }
