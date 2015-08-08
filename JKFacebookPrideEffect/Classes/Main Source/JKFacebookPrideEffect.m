@@ -88,6 +88,8 @@ static NSInteger numberOfColors;
         if (_textRequired) {
             CATextLayer* overlayTextLayer = [CATextLayer new];
             overlayTextLayer.contentsScale = [UIScreen mainScreen].scale;
+            // This filter is to avoid pixalation as label scale increases beyond its capacity.
+            overlayTextLayer.magnificationFilter = kCAFilterNearest;
             overlayTextLayer.frame = CGRectMake(10, (i * heightForEachColorBar) + (heightForEachColorBar - 22) / 2.0, _outputImageView.frame.size.width - 20, 22);
             overlayTextLayer.string = colorLabelTexts[i];
             overlayTextLayer.foregroundColor = _variableTextColors ? [gayPrideColorsCollection[i] colorWithAlphaComponent:1.0].CGColor : _overlayTextColor.CGColor;
