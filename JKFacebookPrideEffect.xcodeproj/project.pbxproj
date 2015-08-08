@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3829AAB71B744E8300C02CAA /* sc.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3829AAB61B744E8300C02CAA /* sc.jpg */; };
+		385A30D01B757FBE00DF71D7 /* sv.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 385A30CF1B757FBE00DF71D7 /* sv.jpg */; };
 		38FBE2DF1B719F1F00C73E08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBE2DE1B719F1F00C73E08 /* main.m */; };
 		38FBE2E21B719F1F00C73E08 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBE2E11B719F1F00C73E08 /* AppDelegate.m */; };
 		38FBE2E51B719F1F00C73E08 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FBE2E41B719F1F00C73E08 /* ViewController.m */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		3829AAB61B744E8300C02CAA /* sc.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sc.jpg; sourceTree = "<group>"; };
+		385A30CF1B757FBE00DF71D7 /* sv.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sv.jpg; sourceTree = "<group>"; };
 		38FBE2D91B719F1F00C73E08 /* JKFacebookPrideEffect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JKFacebookPrideEffect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38FBE2DD1B719F1F00C73E08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38FBE2DE1B719F1F00C73E08 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			children = (
 				38FBE3181B71B52C00C73E08 /* parade.jpg */,
 				3829AAB61B744E8300C02CAA /* sc.jpg */,
+				385A30CF1B757FBE00DF71D7 /* sv.jpg */,
 				38FBE3141B71B32100C73E08 /* vRect.png */,
 				38FBE3151B71B32100C73E08 /* hRect.png */,
 			);
@@ -269,6 +272,7 @@
 				38FBE3191B71B52C00C73E08 /* parade.jpg in Resources */,
 				38FBE3161B71B32100C73E08 /* vRect.png in Resources */,
 				38FBE2EA1B719F1F00C73E08 /* Images.xcassets in Resources */,
+				385A30D01B757FBE00DF71D7 /* sv.jpg in Resources */,
 				3829AAB71B744E8300C02CAA /* sc.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
