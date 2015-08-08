@@ -22,6 +22,7 @@ typedef NS_ENUM(NSUInteger, ImageSource) {
 @property (assign, nonatomic) PrideEffect prideEffect;
 @property (assign, nonatomic) NSUInteger imageSource;
 @property (assign, nonatomic) BOOL showTextOverImage;
+@property (assign, nonatomic) NSTextAlignment textAlignment;
 
 @end
 
@@ -42,11 +43,12 @@ typedef NS_ENUM(NSUInteger, ImageSource) {
     
     prideEffectApplier.prideEffect = self.prideEffect;
     prideEffectApplier.textRequired = self.showTextOverImage;
+    prideEffectApplier.overlayTextAlignment = self.textAlignment;
     prideEffectApplier.variableTextColors = NO;
-    prideEffectApplier.overlayTextAlignment = NSTextAlignmentLeft;
     UIImage* gayProudImage = [prideEffectApplier applyEffect];
     self.imageViewSample.image = gayProudImage;
 }
+
 - (IBAction)showTextSwitchToggled:(UISwitch*)sender {
     self.showTextOverImage = sender.isOn;
 }
@@ -68,6 +70,14 @@ typedef NS_ENUM(NSUInteger, ImageSource) {
     [self applyPrideEffect];
 }
 
+- (IBAction)textAlignmentChanged:(UISegmentedControl*)sender {
+    if (sender.selectedSegmentIndex < 3) {
+        self.textAlignment = sender.selectedSegmentIndex;
+    } else {
+        self.textAlignment = NSTextAlignmentAlternate;
+    }
+}
+
 #pragma delegate for UIAlertView
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex > 0) {
@@ -83,6 +93,5 @@ typedef NS_ENUM(NSUInteger, ImageSource) {
         }
     }
 }
-
 
 @end

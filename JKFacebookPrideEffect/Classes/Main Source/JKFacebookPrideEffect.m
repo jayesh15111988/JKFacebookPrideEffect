@@ -47,7 +47,6 @@ static NSInteger numberOfColors;
             _outputImageViewSize = size;
         _prideEffect = PrideEffectHorizontal;
         _textRequired = NO;
-        _overlayTextAlignment = NSTextAlignmentCenter;
         _overlayTextFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0];
         _overlayTextColor = [UIColor colorWithWhite:1.0 alpha:0.8];
         _variableTextColors = YES;
