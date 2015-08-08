@@ -21,7 +21,7 @@
 
 @implementation JKFacebookPrideEffect
 
-const NSTextAlignment NSTextAlignmentAlternate = 7;
+const  NSTextAlignment NSTextAlignmentAlternate = 7;
 static NSArray* gayPrideColorsCollection;
 static NSArray* colorLabelTexts;
 static NSInteger numberOfColors;
@@ -81,7 +81,7 @@ static NSInteger numberOfColors;
         } else {
             overlayFrame = CGRectMake(0, i * individualDiagonalBarWidth, diagonalLength, individualDiagonalBarWidth);
         }
-        UIView *overlay = [[UIView alloc] initWithFrame:overlayFrame];
+        UIView* overlay = [[UIView alloc] initWithFrame:overlayFrame];
         [overlay setBackgroundColor:gayPrideColorsCollection[i]];
         overlay.clipsToBounds = NO;
         [overlayContainerView addSubview:overlay];
@@ -103,11 +103,15 @@ static NSInteger numberOfColors;
             } else {
                 overlayTextLayer.alignmentMode = [self layerAlignmentFromViewAlignment:self.overlayTextAlignment];
             }
-            [overlayContainerView.layer addSublayer:overlayTextLayer];
+            if (self.prideEffect == PrideEffectVertical || self.prideEffect == PrideEffectHorizontal) {
+                [overlayContainerView.layer addSublayer:overlayTextLayer];
+            } else {
+                [self.outputImageView.layer addSublayer:overlayTextLayer];
+            }
        }
     }
     
-    [_outputImageView addSubview:overlayContainerView];
+    [self.outputImageView addSubview:overlayContainerView];
     if (_prideEffect == PrideEffectPositiveDiagonal) {
         overlayContainerView.transform = CGAffineTransformMakeRotation(-diagonalAngle);
     } else if(_prideEffect == PrideEffectNegativeDiagonal) {

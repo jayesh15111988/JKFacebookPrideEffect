@@ -86,9 +86,9 @@
 		38FBE2D01B719F1F00C73E08 = {
 			isa = PBXGroup;
 			children = (
+				38FBE2DB1B719F1F00C73E08 /* JKFacebookPrideEffect */,
 				38FBE30F1B71A29D00C73E08 /* AVFoundation.framework */,
 				38FBE3061B719FFB00C73E08 /* UIKit.framework */,
-				38FBE2DB1B719F1F00C73E08 /* JKFacebookPrideEffect */,
 				38FBE2F51B719F1F00C73E08 /* JKFacebookPrideEffectTests */,
 				38FBE2DA1B719F1F00C73E08 /* Products */,
 			);

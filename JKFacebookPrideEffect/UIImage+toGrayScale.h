@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 
-@interface UIImage (toGrayScale)
+@interface UIImage(toGrayScale)
 
-- (UIImage *) toGrayscale;
+- (UIImage*)toGrayscale;
 
 @end

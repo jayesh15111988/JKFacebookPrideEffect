@@ -27,7 +27,7 @@ extern const NSTextAlignment NSTextAlignmentAlternate;
 @property (strong, nonatomic) UIColor* overlayTextColor;
 @property (assign, nonatomic) BOOL variableTextColors;
 
-- (instancetype)initWithInputImage:(UIImage *)inputImage andSize:(CGSize)size;
+- (instancetype)initWithInputImage:(UIImage*)inputImage andSize:(CGSize)size;
 - (UIImage*)applyEffect;
 
 

@@ -12,9 +12,9 @@
 //This class is a courtesy of following StackOVerflow post
 //http://stackoverflow.com/questions/23133469/convert-rgb-image-to-grayscale-and-grayscale-to-rgb-image
 
-@implementation UIImage (toGrayScale)
+@implementation UIImage(toGrayScale)
 
--(UIImage *) toGrayscale {
+-(UIImage*)toGrayscale {
     
     //Create image rectangle with current image width/height
     CGRect imageRect = CGRectMake(0, 0, self.size.width * self.scale, self.size.height * self.scale);
@@ -23,7 +23,7 @@
     NSInteger height = imageRect.size.height;
     
     // the pixels will be painted to this array
-    uint32_t *pixels = (uint32_t *) malloc(width * height * sizeof(uint32_t));
+    uint32_t* pixels = (uint32_t *) malloc(width * height * sizeof(uint32_t));
     
     // clear the pixels so any transparency is preserved
     memset(pixels, 0, width * height * sizeof(uint32_t));
@@ -57,7 +57,7 @@
     free(pixels);
     
     // make a new UIImage to return
-    UIImage *resultUIImage = [UIImage imageWithCGImage:image
+    UIImage* resultUIImage = [UIImage imageWithCGImage:image
                                                  scale:self.scale
                                            orientation:UIImageOrientationUp];
     
