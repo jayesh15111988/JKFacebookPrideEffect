@@ -31,6 +31,7 @@ typedef NS_ENUM(NSUInteger, ImageSource) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.inputImage = [UIImage imageNamed:@"parade.jpg"];
+    self.prideEffect = PrideEffectHorizontal;
     [self applyPrideEffect];
 }
 
@@ -45,6 +46,7 @@ typedef NS_ENUM(NSUInteger, ImageSource) {
     prideEffectApplier.textRequired = self.showTextOverImage;
     prideEffectApplier.overlayTextAlignment = self.textAlignment;
     prideEffectApplier.variableTextColors = NO;
+    prideEffectApplier.applyGradientOverlay = YES;
     UIImage* gayProudImage = [prideEffectApplier applyEffect];
     self.imageViewSample.image = gayProudImage;
 }

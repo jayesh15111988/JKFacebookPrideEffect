@@ -26,6 +26,7 @@ extern const NSTextAlignment NSTextAlignmentAlternate;
 @property (strong, nonatomic) UIFont* overlayTextFont;
 @property (strong, nonatomic) UIColor* overlayTextColor;
 @property (assign, nonatomic) BOOL variableTextColors;
+@property (assign, nonatomic) BOOL applyGradientOverlay;
 
 - (instancetype)initWithInputImage:(UIImage*)inputImage andSize:(CGSize)size;
 - (UIImage*)applyEffect;
