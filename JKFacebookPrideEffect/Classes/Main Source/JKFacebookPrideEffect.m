@@ -61,23 +61,24 @@ static NSInteger numberOfColors;
 }
 
 - (UIImage*)applyEffect {
+    CGFloat heightForEachColorBar = _outputImageView.frame.size.height / numberOfColors;
+    CGFloat widthForEachColorBar = _outputImageView.frame.size.width / numberOfColors;
+    UIView* overlayContainerView = [[UIView alloc] init];
     
     if (self.applyGradientOverlay) {
         CAGradientLayer* gradientLayer = [CAGradientLayer layer];
         gradientLayer.frame = CGRectMake(0, 0, self.outputImageView.frame.size.width, self.outputImageView.frame.size.height);
+        overlayContainerView.frame = gradientLayer.frame;
         gradientLayer.colors = gayPrideCGRefColorsCollection;
         gradientLayer.locations = @[@0, @0.167, @0.334, @0.501, @0.668, @0.835];
         // 0 0 +ve diagonal 0 1 vertical 1 0 horizontal 1 0 0 1 -ve diagonal
         gradientLayer.startPoint = [gradientStartPointsCollection[self.prideEffect] CGPointValue];
         gradientLayer.endPoint = [gradientEndPointsCollection[self.prideEffect] CGPointValue];
-        [self.outputImageView.layer addSublayer:gradientLayer];
+        [overlayContainerView.layer addSublayer:gradientLayer];
     } else {
-        CGFloat heightForEachColorBar = _outputImageView.frame.size.height / numberOfColors;
-        CGFloat widthForEachColorBar = _outputImageView.frame.size.width / numberOfColors;
         CGFloat diagonalLength = (sqrt(pow(_outputImageView.frame.size.height, 2) + pow(_outputImageView.frame.size.width, 2)));
         CGFloat individualDiagonalBarWidth = diagonalLength / numberOfColors;
         CGFloat diagonalAngle =  atan(_outputImageView.frame.size.height / _outputImageView.frame.size.width);
-        UIView* overlayContainerView = [[UIView alloc] init];
         overlayContainerView.clipsToBounds = YES;
         if (_prideEffect == PrideEffectPositiveDiagonal || _prideEffect == PrideEffectNegativeDiagonal) {
             overlayContainerView.frame = CGRectMake(0, 0, diagonalLength, diagonalLength);
@@ -99,39 +100,41 @@ static NSInteger numberOfColors;
             [overlay setBackgroundColor:gayPrideColorsCollection[i]];
             overlay.clipsToBounds = NO;
             [overlayContainerView addSubview:overlay];
-        
-            if (_textRequired) {
-                CATextLayer* overlayTextLayer = [CATextLayer new];
-                overlayTextLayer.contentsScale = [UIScreen mainScreen].scale;
-                // This filter is to avoid pixalation as label scale increases beyond its capacity.
-                overlayTextLayer.magnificationFilter = kCAFilterNearest;
-                overlayTextLayer.frame = CGRectMake(10, (i * heightForEachColorBar) + (heightForEachColorBar - 22) / 2.0, _outputImageView.frame.size.width - 20, 22);
-                overlayTextLayer.string = colorLabelTexts[i];
-                overlayTextLayer.foregroundColor = _variableTextColors ? [gayPrideColorsCollection[i] colorWithAlphaComponent:1.0].CGColor : _overlayTextColor.CGColor;
-                [overlayTextLayer setFont:(__bridge CFTypeRef)(_overlayTextFont.fontName)];
-                [overlayTextLayer setFontSize:_overlayTextFont.pointSize];
-                if (self.overlayTextAlignment == NSTextAlignmentAlternate) {
-                    if (i % 2 == 0) {
-                        overlayTextLayer.alignmentMode = kCAAlignmentLeft;
-                    } else {
-                        overlayTextLayer.alignmentMode = kCAAlignmentRight;
-                    }
-                } else {
-                    overlayTextLayer.alignmentMode = [self layerAlignmentFromViewAlignment:self.overlayTextAlignment];
-                }
-                if (self.prideEffect == PrideEffectVertical || self.prideEffect == PrideEffectHorizontal) {
-                    [overlayContainerView.layer addSublayer:overlayTextLayer];
-                } else {
-                    [self.outputImageView.layer addSublayer:overlayTextLayer];
-                }
-            }
         }
         if (_prideEffect == PrideEffectPositiveDiagonal) {
             overlayContainerView.transform = CGAffineTransformMakeRotation(-diagonalAngle);
         } else if(_prideEffect == PrideEffectNegativeDiagonal) {
             overlayContainerView.transform = CGAffineTransformMakeRotation(diagonalAngle);
         }
-        [self.outputImageView addSubview:overlayContainerView];
+    }
+    
+    [self.outputImageView addSubview:overlayContainerView];
+    if (_textRequired) {
+        for (NSInteger i = 0; i < numberOfColors; i++) {
+            CATextLayer* overlayTextLayer = [CATextLayer new];
+            overlayTextLayer.contentsScale = [UIScreen mainScreen].scale;
+            // This filter is to avoid pixalation as label scale increases beyond its capacity.
+            overlayTextLayer.magnificationFilter = kCAFilterNearest;
+            overlayTextLayer.frame = CGRectMake(10, (i * heightForEachColorBar) + (heightForEachColorBar - 22) / 2.0, _outputImageView.frame.size.width - 20, 22);
+            overlayTextLayer.string = colorLabelTexts[i];
+            overlayTextLayer.foregroundColor = _variableTextColors ? [gayPrideColorsCollection[i] colorWithAlphaComponent:1.0].CGColor : _overlayTextColor.CGColor;
+            [overlayTextLayer setFont:(__bridge CFTypeRef)(_overlayTextFont.fontName)];
+            [overlayTextLayer setFontSize:_overlayTextFont.pointSize];
+            if (self.overlayTextAlignment == NSTextAlignmentAlternate) {
+                if (i % 2 == 0) {
+                    overlayTextLayer.alignmentMode = kCAAlignmentLeft;
+                } else {
+                    overlayTextLayer.alignmentMode = kCAAlignmentRight;
+                }
+            } else {
+                overlayTextLayer.alignmentMode = [self layerAlignmentFromViewAlignment:self.overlayTextAlignment];
+            }
+            if (self.prideEffect == PrideEffectVertical || self.prideEffect == PrideEffectHorizontal) {
+                [overlayContainerView.layer addSublayer:overlayTextLayer];
+            } else {
+                [self.outputImageView.layer addSublayer:overlayTextLayer];
+            }
+        }
     }
     
     CGRect rect = [_outputImageView bounds];
