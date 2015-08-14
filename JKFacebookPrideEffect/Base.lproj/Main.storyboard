@@ -75,7 +75,7 @@
                                 </connections>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vud-gh-y9f">
-                                <rect key="frame" x="136" y="354" width="51" height="31"/>
+                                <rect key="frame" x="157" y="354" width="51" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="lmM-S5-wzL"/>
                                     <constraint firstAttribute="width" constant="49" id="rWl-Mx-O6g"/>
@@ -84,16 +84,6 @@
                                     <action selector="showTextSwitchToggled:" destination="BYZ-38-t0r" eventType="valueChanged" id="nvv-WC-PoN"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Text?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ac9-GE-yKS">
-                                <rect key="frame" x="195" y="359" width="96" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="hlo-MP-3qs"/>
-                                    <constraint firstAttribute="width" constant="96" id="xcB-1B-B5X"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fep-Tc-uxr">
                                 <rect key="frame" x="16" y="284" width="288" height="29"/>
                                 <constraints>
@@ -110,6 +100,32 @@
                                     <action selector="textAlignmentChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="P5H-vJ-a8P"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gradient" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xh8-Db-OS4">
+                                <rect key="frame" x="70" y="359" width="71" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="71" id="LxC-zx-o29"/>
+                                    <constraint firstAttribute="height" constant="21" id="Qkg-Xw-ACY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Afh-Ki-k6E">
+                                <rect key="frame" x="8" y="354" width="51" height="31"/>
+                                <connections>
+                                    <action selector="showGradientSwitchToggled:" destination="BYZ-38-t0r" eventType="valueChanged" id="Yzh-bJ-VLs"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Text?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ac9-GE-yKS">
+                                <rect key="frame" x="214" y="359" width="96" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="hlo-MP-3qs"/>
+                                    <constraint firstAttribute="width" constant="96" id="xcB-1B-B5X"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -118,23 +134,31 @@
                             <constraint firstItem="H8n-hK-VZ5" firstAttribute="top" secondItem="vud-gh-y9f" secondAttribute="bottom" constant="15" id="6f5-Sy-evL"/>
                             <constraint firstItem="vud-gh-y9f" firstAttribute="top" secondItem="UxP-Cy-rd8" secondAttribute="bottom" constant="7" id="CrR-CR-AmD"/>
                             <constraint firstItem="fep-Tc-uxr" firstAttribute="top" secondItem="M6w-dT-gk5" secondAttribute="bottom" constant="8" id="DbT-9N-EJa"/>
+                            <constraint firstItem="Xh8-Db-OS4" firstAttribute="top" secondItem="UxP-Cy-rd8" secondAttribute="bottom" constant="12" id="DhI-AB-ers"/>
                             <constraint firstItem="wJ8-im-GQR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="FCm-sc-cQJ"/>
+                            <constraint firstItem="ac9-GE-yKS" firstAttribute="leading" secondItem="vud-gh-y9f" secondAttribute="trailing" constant="8" id="LU2-At-QzH"/>
+                            <constraint firstItem="Afh-Ki-k6E" firstAttribute="top" secondItem="UxP-Cy-rd8" secondAttribute="bottom" constant="7" id="SWU-K8-WYF"/>
                             <constraint firstItem="wJ8-im-GQR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="T2B-Wb-T8s"/>
                             <constraint firstItem="ac9-GE-yKS" firstAttribute="leading" secondItem="vud-gh-y9f" secondAttribute="trailing" constant="10" id="XCu-VF-D0d"/>
                             <constraint firstAttribute="centerX" secondItem="vud-gh-y9f" secondAttribute="centerX" id="a2Z-mt-iYn"/>
                             <constraint firstItem="wJ8-im-GQR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="aeq-Gp-x0H"/>
                             <constraint firstItem="UxP-Cy-rd8" firstAttribute="top" secondItem="fep-Tc-uxr" secondAttribute="bottom" constant="7" id="byD-Vq-k9b"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ac9-GE-yKS" secondAttribute="trailing" constant="-6" id="fLk-Kw-JfY"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="wJ8-im-GQR" secondAttribute="bottom" id="guQ-BW-uHe"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wJ8-im-GQR" secondAttribute="trailing" constant="-16" id="haz-Lz-pEW"/>
+                            <constraint firstItem="Afh-Ki-k6E" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-8" id="kOq-Mw-MGc"/>
                             <constraint firstItem="vud-gh-y9f" firstAttribute="top" secondItem="UxP-Cy-rd8" secondAttribute="bottom" constant="7" id="tLg-Tv-6AC"/>
                             <constraint firstItem="ac9-GE-yKS" firstAttribute="top" secondItem="UxP-Cy-rd8" secondAttribute="bottom" constant="12" id="w4o-y9-ivo"/>
                             <constraint firstAttribute="centerX" secondItem="UxP-Cy-rd8" secondAttribute="centerX" id="wC6-gB-VHk"/>
                             <constraint firstItem="M6w-dT-gk5" firstAttribute="top" secondItem="wJ8-im-GQR" secondAttribute="bottom" constant="8" id="wQL-Cx-ZgZ"/>
+                            <constraint firstItem="Xh8-Db-OS4" firstAttribute="leading" secondItem="Afh-Ki-k6E" secondAttribute="trailing" constant="13" id="wRq-c7-CbS"/>
                             <constraint firstAttribute="centerX" secondItem="M6w-dT-gk5" secondAttribute="centerX" id="zRb-ef-lX9"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="CrR-CR-AmD"/>
+                                <exclude reference="a2Z-mt-iYn"/>
+                                <exclude reference="XCu-VF-D0d"/>
                                 <exclude reference="guQ-BW-uHe"/>
                             </mask>
                         </variation>
@@ -142,6 +166,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="imageViewSample" destination="wJ8-im-GQR" id="hHW-sv-aqY"/>
+                        <outlet property="showGradientSwitch" destination="Afh-Ki-k6E" id="9B0-3A-w1L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

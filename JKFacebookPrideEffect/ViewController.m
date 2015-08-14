@@ -23,6 +23,8 @@ typedef NS_ENUM(NSUInteger, ImageSource) {
 @property (assign, nonatomic) NSUInteger imageSource;
 @property (assign, nonatomic) BOOL showTextOverImage;
 @property (assign, nonatomic) NSTextAlignment textAlignment;
+@property (weak, nonatomic) IBOutlet UISwitch *showGradientSwitch;
+@property (assign, nonatomic) BOOL toShowGradient;
 
 @end
 
@@ -32,6 +34,7 @@ typedef NS_ENUM(NSUInteger, ImageSource) {
     [super viewDidLoad];
     self.inputImage = [UIImage imageNamed:@"parade.jpg"];
     self.prideEffect = PrideEffectHorizontal;
+    self.toShowGradient = NO;
     [self applyPrideEffect];
 }
 
@@ -46,7 +49,7 @@ typedef NS_ENUM(NSUInteger, ImageSource) {
     prideEffectApplier.textRequired = self.showTextOverImage;
     prideEffectApplier.overlayTextAlignment = self.textAlignment;
     prideEffectApplier.variableTextColors = NO;
-    prideEffectApplier.applyGradientOverlay = YES;
+    prideEffectApplier.applyGradientOverlay = self.toShowGradient;
     UIImage* gayProudImage = [prideEffectApplier applyEffect];
     self.imageViewSample.image = gayProudImage;
 }
@@ -54,6 +57,11 @@ typedef NS_ENUM(NSUInteger, ImageSource) {
 - (IBAction)showTextSwitchToggled:(UISwitch*)sender {
     self.showTextOverImage = sender.isOn;
 }
+
+- (IBAction)showGradientSwitchToggled:(UISwitch*)sender {
+    self.toShowGradient = sender.isOn;
+}
+
 
 - (IBAction)imageSourceChanged:(UISegmentedControl*)sender {
     self.imageSource = sender.selectedSegmentIndex;

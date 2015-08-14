@@ -107,8 +107,8 @@ static NSInteger numberOfColors;
             overlayContainerView.transform = CGAffineTransformMakeRotation(diagonalAngle);
         }
     }
-    
     [self.outputImageView addSubview:overlayContainerView];
+    
     if (_textRequired) {
         for (NSInteger i = 0; i < numberOfColors; i++) {
             CATextLayer* overlayTextLayer = [CATextLayer new];

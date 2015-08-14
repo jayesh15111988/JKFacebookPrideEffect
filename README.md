@@ -28,4 +28,6 @@ Initialize ```JKFacebookPrideEffect``` class with required parameters such as,
 ```UIColor* overlayTextColor``` -   Color to be used for overlay text   
 ```BOOL variableTextColors``` - Decided whether to use fixed or variable colors for each series of overlay texts
 
+``` BOOL applyGradientOverlay``` - Decides whether to apply smooth color gradient image to overlay effect rather than just providing step colors. Can be toggled with this flag value
+
 [FacebookPrideEffectDemo]: https://github.com/jayesh15111988/JKFacebookPrideEffect/blob/master/Demo/FacebookParadePrideEffectDemo.gif "Facebook Style Pride effect for images"
