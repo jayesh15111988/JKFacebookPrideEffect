@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import "JKFacebookPrideEffect.h"
+#import "Constants.h"
+#import "JKImageEffectInfo.h"
 #import <AVFoundation/AVFoundation.h>
 
 typedef NS_ENUM(NSUInteger, ImageSource) {
@@ -39,11 +41,12 @@ typedef NS_ENUM(NSUInteger, ImageSource) {
 }
 
 - (void)applyPrideEffect {
-    JKFacebookPrideEffect* prideEffectApplier = [[JKFacebookPrideEffect alloc] initWithInputImage:self.inputImage andSize:self.imageViewSample.frame.size];
-    if (self.imageSource == ImageSourceLocal) {
-        self.inputImage = [UIImage imageNamed:@"parade.jpg"];
-        self.imageViewSample.image = self.inputImage;
-    }
+    NSArray* colors = @[UIColorFromRGB(0xFF0000), UIColorFromRGB(0xFBA71C), UIColorFromRGB(0xFFFF01), UIColorFromRGB(0x30CA6A), UIColorFromRGB(0x057BB2), UIColorFromRGB(0x4C2D7B)];
+    NSArray* colorTexts = @[@"LIFE", @"HEALING", @"SUNLIGHT", @"NATURE", @"HARMONY", @"SPIRIT"];
+    
+    JKImageEffectInfo* facebookPrideEffect = [[JKImageEffectInfo alloc] initWithInputImage:self.inputImage andSize:self.imageViewSample.frame.size andColors:colors andTexts:colorTexts];
+    JKImageEffectInfo* indianFlagEffect = [[JKImageEffectInfo alloc] initWithInputImage:self.inputImage andSize:self.imageViewSample.frame.size andColors:@[UIColorFromRGB(0xFF9933), UIColorFromRGB(0xFFFFFF), UIColorFromRGB(0x138808)] andTexts:@[@"Strength", @"Peace", @"Growth"]];
+    JKFacebookPrideEffect* prideEffectApplier = [[JKFacebookPrideEffect alloc] initWithImageEffectInfo:facebookPrideEffect];
     
     prideEffectApplier.prideEffect = self.prideEffect;
     prideEffectApplier.textRequired = self.showTextOverImage;
@@ -69,6 +72,8 @@ typedef NS_ENUM(NSUInteger, ImageSource) {
         UIAlertView* inputTextAlertBox = [[UIAlertView alloc] initWithTitle:@"Remote Image" message:@"Please provide URL for remote image source" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
         inputTextAlertBox.alertViewStyle = UIAlertViewStylePlainTextInput;
         [inputTextAlertBox show];
+    } else if (self.imageSource == ImageSourceLocal) {
+        self.inputImage = [UIImage imageNamed:@"parade.jpg"];
     }
 }
 

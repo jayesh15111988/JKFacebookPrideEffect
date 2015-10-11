@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+@class JKImageEffectInfo;
 
 typedef enum : NSUInteger {
     PrideEffectHorizontal,
@@ -28,7 +29,7 @@ extern const NSTextAlignment NSTextAlignmentAlternate;
 @property (assign, nonatomic) BOOL variableTextColors;
 @property (assign, nonatomic) BOOL applyGradientOverlay;
 
-- (instancetype)initWithInputImage:(UIImage*)inputImage andSize:(CGSize)size;
+- (instancetype)initWithImageEffectInfo:(JKImageEffectInfo*)imageEffectInfo;
 - (UIImage*)applyEffect;
 
 

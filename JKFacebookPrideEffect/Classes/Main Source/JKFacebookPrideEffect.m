@@ -9,6 +9,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "JKFacebookPrideEffect.h"
 #import "UIImage+toGrayScale.h"
+#import "JKImageEffectInfo.h"
 #import "Constants.h"
 
 @interface JKFacebookPrideEffect ()
@@ -16,6 +17,8 @@
 @property (strong, nonatomic) UIImageView* outputImageView;
 @property (assign, nonatomic) CGSize outputImageViewSize;
 @property (assign, nonatomic) CGFloat overlayAlpha;
+@property (copy, nonatomic) NSArray* gayPrideColorsCollection;
+@property (copy, nonatomic) NSArray* colorLabelTexts;
 
 @end
 
@@ -24,33 +27,30 @@
 const  NSTextAlignment NSTextAlignmentAlternate = 7;
 static NSArray* gradientStartPointsCollection;
 static NSArray* gradientEndPointsCollection;
-static NSArray* gayPrideColorsCollection;
 static NSArray* gayPrideCGRefColorsCollection;
-static NSArray* colorLabelTexts;
-static NSInteger numberOfColors;
 
 + (void)load {
-    gayPrideColorsCollection = @[UIColorFromRGB(0xFF0000), UIColorFromRGB(0xFBA71C), UIColorFromRGB(0xFFFF01), UIColorFromRGB(0x30CA6A), UIColorFromRGB(0x057BB2), UIColorFromRGB(0x4C2D7B)];
-    gayPrideCGRefColorsCollection = @[(__bridge id) UIColorFromRGB(0xFF0000).CGColor, (__bridge id) UIColorFromRGB(0xFBA71C).CGColor, (__bridge id) UIColorFromRGB(0xFFFF01).CGColor, (__bridge id) UIColorFromRGB(0x30CA6A).CGColor, (__bridge id) UIColorFromRGB(0x057BB2).CGColor, (__bridge id) UIColorFromRGB(0x4C2D7B).CGColor];
     gradientStartPointsCollection = @[[NSValue valueWithCGPoint:CGPointMake(1, 0)], [NSValue valueWithCGPoint:CGPointMake(0, 1)], [NSValue valueWithCGPoint:CGPointMake(0, 0)], [NSValue valueWithCGPoint:CGPointMake(1, 0)]];
     gradientEndPointsCollection = @[[NSValue valueWithCGPoint:CGPointMake(1, 1)], [NSValue valueWithCGPoint:CGPointMake(1, 1)], [NSValue valueWithCGPoint:CGPointMake(1, 1)], [NSValue valueWithCGPoint:CGPointMake(0, 1)]];
     // Ref : https://en.wikipedia.org/wiki/Rainbow_flag_(LGBT_movement)
-    colorLabelTexts = @[@"LIFE", @"HEALING", @"SUNLIGHT", @"NATURE", @"HARMONY", @"SPIRIT"];
-    numberOfColors = 6;
-    NSAssert([gayPrideColorsCollection count] == numberOfColors, @"Number of colors should match the size of array holding successive color values");
-    NSAssert(numberOfColors > 0, @"You must supply at least one color value");
 }
 
-- (instancetype)initWithInputImage:(UIImage *)inputImage andSize:(CGSize)size {
+- (instancetype)initWithImageEffectInfo:(JKImageEffectInfo*)imageEffectInfo {
+    
+    NSAssert([imageEffectInfo.colors count] == [imageEffectInfo.texts count], @"Number of colors should match with array holding text values");
+    NSAssert([imageEffectInfo.colors count] > 0, @"You must supply at least one color value");
     
     if (self = [super init]) {
+        UIImage* inputImage = imageEffectInfo.inputImage;
         UIImage* grayScaleImage = [inputImage toGrayscale];
-        _outputImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+        _gayPrideColorsCollection = imageEffectInfo.colors;
+        _colorLabelTexts = imageEffectInfo.texts;
+        _outputImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, imageEffectInfo.imageSize.width, imageEffectInfo.imageSize.height)];
         _outputImageView.contentMode = UIViewContentModeScaleAspectFit;
         _outputImageView.image = grayScaleImage;
         _outputImageView.clipsToBounds = YES;
         [_outputImageView setFrame:AVMakeRectWithAspectRatioInsideRect(inputImage.size, _outputImageView.frame)];
-            _outputImageViewSize = size;
+            _outputImageViewSize = imageEffectInfo.imageSize;
         _prideEffect = PrideEffectHorizontal;
         _textRequired = NO;
         _overlayTextFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0];
@@ -61,6 +61,7 @@ static NSInteger numberOfColors;
 }
 
 - (UIImage*)applyEffect {
+    NSInteger numberOfColors = _gayPrideColorsCollection.count;
     CGFloat heightForEachColorBar = _outputImageView.frame.size.height / numberOfColors;
     CGFloat widthForEachColorBar = _outputImageView.frame.size.width / numberOfColors;
     UIView* overlayContainerView = [[UIView alloc] init];
@@ -69,8 +70,8 @@ static NSInteger numberOfColors;
         CAGradientLayer* gradientLayer = [CAGradientLayer layer];
         gradientLayer.frame = CGRectMake(0, 0, self.outputImageView.frame.size.width, self.outputImageView.frame.size.height);
         overlayContainerView.frame = gradientLayer.frame;
-        gradientLayer.colors = gayPrideCGRefColorsCollection;
-        gradientLayer.locations = @[@0, @0.167, @0.334, @0.501, @0.668, @0.835];
+        gradientLayer.colors = [self CGRefColorFormatCollection];
+        gradientLayer.locations = [self gradientCollectionWithColorCount:numberOfColors];
         // 0 0 +ve diagonal 0 1 vertical 1 0 horizontal 1 0 0 1 -ve diagonal
         gradientLayer.startPoint = [gradientStartPointsCollection[self.prideEffect] CGPointValue];
         gradientLayer.endPoint = [gradientEndPointsCollection[self.prideEffect] CGPointValue];
@@ -97,7 +98,7 @@ static NSInteger numberOfColors;
                 overlayFrame = CGRectMake(0, i * individualDiagonalBarWidth, diagonalLength, individualDiagonalBarWidth);
             }
             UIView* overlay = [[UIView alloc] initWithFrame:overlayFrame];
-            [overlay setBackgroundColor:gayPrideColorsCollection[i]];
+            [overlay setBackgroundColor:self.gayPrideColorsCollection[i]];
             overlay.clipsToBounds = NO;
             [overlayContainerView addSubview:overlay];
         }
@@ -116,8 +117,8 @@ static NSInteger numberOfColors;
             // This filter is to avoid pixalation as label scale increases beyond its capacity.
             overlayTextLayer.magnificationFilter = kCAFilterNearest;
             overlayTextLayer.frame = CGRectMake(10, (i * heightForEachColorBar) + (heightForEachColorBar - 22) / 2.0, _outputImageView.frame.size.width - 20, 22);
-            overlayTextLayer.string = colorLabelTexts[i];
-            overlayTextLayer.foregroundColor = _variableTextColors ? [gayPrideColorsCollection[i] colorWithAlphaComponent:1.0].CGColor : _overlayTextColor.CGColor;
+            overlayTextLayer.string = self.colorLabelTexts[i];
+            overlayTextLayer.foregroundColor = _variableTextColors ? [self.gayPrideColorsCollection[i] colorWithAlphaComponent:1.0].CGColor : _overlayTextColor.CGColor;
             [overlayTextLayer setFont:(__bridge CFTypeRef)(_overlayTextFont.fontName)];
             [overlayTextLayer setFontSize:_overlayTextFont.pointSize];
             if (self.overlayTextAlignment == NSTextAlignmentAlternate) {
@@ -145,6 +146,25 @@ static NSInteger numberOfColors;
     UIGraphicsEndImageContext();
     
     return capturedImageWithPrideEffect;
+}
+
+- (NSArray*)gradientCollectionWithColorCount:(NSInteger)totalNumberOfColors {
+    NSMutableArray* gradientPositionCollection = [[NSMutableArray alloc] initWithObjects:@(0), nil];
+    CGFloat positionMultiplier = 1/(double)totalNumberOfColors;
+    NSInteger counter = 1;
+    while (counter < totalNumberOfColors) {
+        [gradientPositionCollection addObject:@(counter * positionMultiplier)];
+        counter++;
+    }
+    return gradientPositionCollection;
+}
+
+- (NSArray*)CGRefColorFormatCollection {
+    NSMutableArray* cgrefColorFormats = [NSMutableArray new];
+    for (UIColor* color in self.gayPrideColorsCollection) {
+        [cgrefColorFormats addObject:(__bridge id) color.CGColor];
+    }
+    return cgrefColorFormats;
 }
 
 - (NSString*)layerAlignmentFromViewAlignment:(NSTextAlignment)alignment {
