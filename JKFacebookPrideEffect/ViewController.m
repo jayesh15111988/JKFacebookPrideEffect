@@ -45,10 +45,10 @@ typedef NS_ENUM(NSUInteger, ImageSource) {
     NSArray* colorTexts = @[@"LIFE", @"HEALING", @"SUNLIGHT", @"NATURE", @"HARMONY", @"SPIRIT"];
     
     JKImageEffectInfo* facebookPrideEffect = [[JKImageEffectInfo alloc] initWithInputImage:self.inputImage andSize:self.imageViewSample.frame.size andColors:colors andTexts:colorTexts];
-    JKImageEffectInfo* indianFlagEffect = [[JKImageEffectInfo alloc] initWithInputImage:self.inputImage andSize:self.imageViewSample.frame.size andColors:@[UIColorFromRGB(0xFF9933), UIColorFromRGB(0xFFFFFF), UIColorFromRGB(0x138808)] andTexts:@[@"Strength", @"Peace", @"Growth"]];
+    JKImageEffectInfo* indianFlagEffect = [[JKImageEffectInfo alloc] initWithInputImage:self.inputImage andSize:self.imageViewSample.frame.size andColors:@[UIColorFromRGB(0xFF9933), UIColorFromRGB(0xFFFFFF), UIColorFromRGB(0x138808)] andTexts:@[@"Strength", @"Peace", @"Growth"] andTotalHeightFractions:@[@(0.25), @(0.5), @(0.25)]];
     JKFacebookPrideEffect* prideEffectApplier = [[JKFacebookPrideEffect alloc] initWithImageEffectInfo:indianFlagEffect];
     
-    prideEffectApplier.prideEffect = self.prideEffect;
+    prideEffectApplier.prideEffect = PrideEffectVertical;
     prideEffectApplier.overlayTextAlignment = self.textAlignment;
     prideEffectApplier.variableTextColors = NO;
     prideEffectApplier.applyGradientOverlay = self.toShowGradient;

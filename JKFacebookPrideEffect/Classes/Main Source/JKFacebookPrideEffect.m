@@ -86,7 +86,6 @@ static NSArray* gayPrideCGRefColorsCollection;
         [overlayContainerView.layer addSublayer:gradientLayer];
     } else {
         CGFloat diagonalLength = (sqrt(pow(_outputImageView.frame.size.height, 2) + pow(_outputImageView.frame.size.width, 2)));
-        CGFloat individualDiagonalBarWidth = diagonalLength / numberOfColors;
         CGFloat diagonalAngle =  atan(_outputImageView.frame.size.height / _outputImageView.frame.size.width);
         overlayContainerView.clipsToBounds = YES;
         if (_prideEffect == PrideEffectPositiveDiagonal || _prideEffect == PrideEffectNegativeDiagonal) {
@@ -95,22 +94,28 @@ static NSArray* gayPrideCGRefColorsCollection;
         } else {
             overlayContainerView.frame = CGRectMake(0, 0, _outputImageView.frame.size.width, _outputImageView.frame.size.height);
         }
-    
+        
+        CGFloat fractionsSum = 0;
         for (NSInteger i = 0; i < numberOfColors; i++) {
             CGRect overlayFrame;
             if (_prideEffect == PrideEffectHorizontal) {
                 CGFloat heightForEachColorBar = totalHeight * [_totalHeightFractionCollection[i] floatValue];
-                overlayFrame = CGRectMake(0, i * heightForEachColorBar, totalWidth, heightForEachColorBar);
+                CGFloat heightForPreviousBar = totalHeight * fractionsSum;
+                overlayFrame = CGRectMake(0, heightForPreviousBar, totalWidth, heightForEachColorBar);
             } else if (_prideEffect == PrideEffectVertical) {
                 CGFloat widthForEachColorBar = totalWidth * [_totalHeightFractionCollection[i] floatValue];
-                overlayFrame = CGRectMake((i * widthForEachColorBar), 0, widthForEachColorBar, totalHeight);
+                CGFloat widthForPreviousBar = totalWidth * fractionsSum;
+                overlayFrame = CGRectMake(widthForPreviousBar, 0, widthForEachColorBar, totalHeight);
             } else {
-                overlayFrame = CGRectMake(0, i * individualDiagonalBarWidth, diagonalLength, individualDiagonalBarWidth);
+                CGFloat individualDiagonalBarWidth = diagonalLength * [_totalHeightFractionCollection[i] floatValue];
+                CGFloat widthForPreviousDiagonal = diagonalLength * fractionsSum;
+                overlayFrame = CGRectMake(0, widthForPreviousDiagonal, diagonalLength, individualDiagonalBarWidth);
             }
             UIView* overlay = [[UIView alloc] initWithFrame:overlayFrame];
             [overlay setBackgroundColor:self.gayPrideColorsCollection[i]];
             overlay.clipsToBounds = NO;
             [overlayContainerView addSubview:overlay];
+            fractionsSum += [_totalHeightFractionCollection[i] floatValue];
         }
         if (_prideEffect == PrideEffectPositiveDiagonal) {
             overlayContainerView.transform = CGAffineTransformMakeRotation(-diagonalAngle);
@@ -120,14 +125,19 @@ static NSArray* gayPrideCGRefColorsCollection;
     }
     [self.outputImageView addSubview:overlayContainerView];
     
+    CGFloat fractionsSum = 0;
     if (_textRequired) {
         for (NSInteger i = 0; i < numberOfColors; i++) {
             CGFloat heightForEachColorBar = totalHeight * [_totalHeightFractionCollection[i] floatValue];
+            
+            CGFloat heightForPreviousBar = totalHeight * fractionsSum;
+
+            
             CATextLayer* overlayTextLayer = [CATextLayer new];
             overlayTextLayer.contentsScale = [UIScreen mainScreen].scale;
             // This filter is to avoid pixalation as label scale increases beyond its capacity.
             overlayTextLayer.magnificationFilter = kCAFilterNearest;
-            overlayTextLayer.frame = CGRectMake(10, (i * heightForEachColorBar) + (heightForEachColorBar - 22) / 2.0, _outputImageView.frame.size.width - 20, 22);
+            overlayTextLayer.frame = CGRectMake(10, (heightForPreviousBar) + (heightForEachColorBar - 22) / 2.0, _outputImageView.frame.size.width - 20, 22);
             overlayTextLayer.string = self.colorLabelTexts[i];
             overlayTextLayer.foregroundColor = _variableTextColors ? [self.gayPrideColorsCollection[i] colorWithAlphaComponent:1.0].CGColor : _overlayTextColor.CGColor;
             [overlayTextLayer setFont:(__bridge CFTypeRef)(_overlayTextFont.fontName)];
@@ -146,6 +156,7 @@ static NSArray* gayPrideCGRefColorsCollection;
             } else {
                 [self.outputImageView.layer addSublayer:overlayTextLayer];
             }
+            fractionsSum += [_totalHeightFractionCollection[i] floatValue];
         }
     }
     
