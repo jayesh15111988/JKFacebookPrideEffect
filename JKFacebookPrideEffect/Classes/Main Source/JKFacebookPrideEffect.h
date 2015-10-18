@@ -22,7 +22,6 @@ extern const NSTextAlignment NSTextAlignmentAlternate;
 @interface JKFacebookPrideEffect : NSObject
 
 @property (assign, nonatomic) PrideEffect prideEffect;
-@property (assign, nonatomic) BOOL textRequired;
 @property (assign, nonatomic) NSTextAlignment overlayTextAlignment;
 @property (strong, nonatomic) UIFont* overlayTextFont;
 @property (strong, nonatomic) UIColor* overlayTextColor;

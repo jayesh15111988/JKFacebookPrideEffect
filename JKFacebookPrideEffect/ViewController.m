@@ -49,7 +49,6 @@ typedef NS_ENUM(NSUInteger, ImageSource) {
     JKFacebookPrideEffect* prideEffectApplier = [[JKFacebookPrideEffect alloc] initWithImageEffectInfo:facebookPrideEffect];
     
     prideEffectApplier.prideEffect = self.prideEffect;
-    prideEffectApplier.textRequired = self.showTextOverImage;
     prideEffectApplier.overlayTextAlignment = self.textAlignment;
     prideEffectApplier.variableTextColors = NO;
     prideEffectApplier.applyGradientOverlay = self.toShowGradient;

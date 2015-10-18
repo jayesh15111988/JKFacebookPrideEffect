@@ -12,6 +12,7 @@
 @interface JKImageEffectInfo : NSObject
 
 - (instancetype)initWithInputImage:(UIImage*)image andSize:(CGSize)imageSize andColors:(NSArray*)colors andTexts:(NSArray*)texts;
+- (instancetype)initWithInputImage:(UIImage*)image andSize:(CGSize)imageSize andColors:(NSArray*)colors;
 @property (nonatomic, strong, readonly) UIImage* inputImage;
 @property (nonatomic, assign, readonly) CGSize imageSize;
 @property (nonatomic, copy, readonly) NSArray* colors;

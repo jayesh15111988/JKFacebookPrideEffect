@@ -20,4 +20,13 @@
     return self;
 }
 
+- (instancetype)initWithInputImage:(UIImage*)image andSize:(CGSize)imageSize andColors:(NSArray*)colors {
+    if (self = [super init]) {
+        _inputImage = image;
+        _imageSize = imageSize;
+        _colors = colors;
+    }
+    return self;
+}
+
 @end

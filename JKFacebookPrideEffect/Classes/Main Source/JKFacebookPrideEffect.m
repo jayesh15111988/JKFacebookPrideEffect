@@ -19,6 +19,7 @@
 @property (assign, nonatomic) CGFloat overlayAlpha;
 @property (copy, nonatomic) NSArray* gayPrideColorsCollection;
 @property (copy, nonatomic) NSArray* colorLabelTexts;
+@property (assign, nonatomic) BOOL textRequired;
 
 @end
 
@@ -37,22 +38,26 @@ static NSArray* gayPrideCGRefColorsCollection;
 
 - (instancetype)initWithImageEffectInfo:(JKImageEffectInfo*)imageEffectInfo {
     
-    NSAssert([imageEffectInfo.colors count] == [imageEffectInfo.texts count], @"Number of colors should match with array holding text values");
     NSAssert([imageEffectInfo.colors count] > 0, @"You must supply at least one color value");
+    if (imageEffectInfo.texts) {
+        NSAssert([imageEffectInfo.colors count] == [imageEffectInfo.texts count], @"Number of colors should match with array holding text values");
+    }
     
     if (self = [super init]) {
         UIImage* inputImage = imageEffectInfo.inputImage;
         UIImage* grayScaleImage = [inputImage toGrayscale];
         _gayPrideColorsCollection = imageEffectInfo.colors;
-        _colorLabelTexts = imageEffectInfo.texts;
+        if (imageEffectInfo.texts) {
+            _colorLabelTexts = imageEffectInfo.texts;
+        }
         _outputImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, imageEffectInfo.imageSize.width, imageEffectInfo.imageSize.height)];
         _outputImageView.contentMode = UIViewContentModeScaleAspectFit;
         _outputImageView.image = grayScaleImage;
-        _outputImageView.clipsToBounds = YES;
+        _outputImageView.clipsToBounds = NO;
         [_outputImageView setFrame:AVMakeRectWithAspectRatioInsideRect(inputImage.size, _outputImageView.frame)];
-            _outputImageViewSize = imageEffectInfo.imageSize;
+        _outputImageViewSize = imageEffectInfo.imageSize;
         _prideEffect = PrideEffectHorizontal;
-        _textRequired = NO;
+        _textRequired = imageEffectInfo.texts != nil;
         _overlayTextFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0];
         _overlayTextColor = [UIColor colorWithWhite:1.0 alpha:0.8];
         _variableTextColors = YES;
