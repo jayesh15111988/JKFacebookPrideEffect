@@ -13,9 +13,13 @@
 
 - (instancetype)initWithInputImage:(UIImage*)image andSize:(CGSize)imageSize andColors:(NSArray*)colors andTexts:(NSArray*)texts;
 - (instancetype)initWithInputImage:(UIImage*)image andSize:(CGSize)imageSize andColors:(NSArray*)colors;
+- (instancetype)initWithInputImage:(UIImage*)image andSize:(CGSize)imageSize andColors:(NSArray*)colors andTexts:(NSArray*)texts andTotalHeightFractions:(NSArray*)fractions;
+- (instancetype)initWithInputImage:(UIImage*)image andSize:(CGSize)imageSize andColors:(NSArray*)colors andTotalHeightFractions:(NSArray*)fractions;
+
 @property (nonatomic, strong, readonly) UIImage* inputImage;
 @property (nonatomic, assign, readonly) CGSize imageSize;
 @property (nonatomic, copy, readonly) NSArray* colors;
 @property (nonatomic, copy, readonly) NSArray* texts;
+@property (nonatomic, copy, readonly) NSArray* totalHeightFractions;
 
 @end

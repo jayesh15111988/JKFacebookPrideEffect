@@ -46,7 +46,7 @@ typedef NS_ENUM(NSUInteger, ImageSource) {
     
     JKImageEffectInfo* facebookPrideEffect = [[JKImageEffectInfo alloc] initWithInputImage:self.inputImage andSize:self.imageViewSample.frame.size andColors:colors andTexts:colorTexts];
     JKImageEffectInfo* indianFlagEffect = [[JKImageEffectInfo alloc] initWithInputImage:self.inputImage andSize:self.imageViewSample.frame.size andColors:@[UIColorFromRGB(0xFF9933), UIColorFromRGB(0xFFFFFF), UIColorFromRGB(0x138808)] andTexts:@[@"Strength", @"Peace", @"Growth"]];
-    JKFacebookPrideEffect* prideEffectApplier = [[JKFacebookPrideEffect alloc] initWithImageEffectInfo:facebookPrideEffect];
+    JKFacebookPrideEffect* prideEffectApplier = [[JKFacebookPrideEffect alloc] initWithImageEffectInfo:indianFlagEffect];
     
     prideEffectApplier.prideEffect = self.prideEffect;
     prideEffectApplier.overlayTextAlignment = self.textAlignment;

@@ -19,6 +19,7 @@
 @property (assign, nonatomic) CGFloat overlayAlpha;
 @property (copy, nonatomic) NSArray* gayPrideColorsCollection;
 @property (copy, nonatomic) NSArray* colorLabelTexts;
+@property (copy, nonatomic) NSArray* totalHeightFractionCollection;
 @property (assign, nonatomic) BOOL textRequired;
 
 @end
@@ -47,13 +48,14 @@ static NSArray* gayPrideCGRefColorsCollection;
         UIImage* inputImage = imageEffectInfo.inputImage;
         UIImage* grayScaleImage = [inputImage toGrayscale];
         _gayPrideColorsCollection = imageEffectInfo.colors;
+        _totalHeightFractionCollection = imageEffectInfo.totalHeightFractions;
         if (imageEffectInfo.texts) {
             _colorLabelTexts = imageEffectInfo.texts;
         }
         _outputImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, imageEffectInfo.imageSize.width, imageEffectInfo.imageSize.height)];
         _outputImageView.contentMode = UIViewContentModeScaleAspectFit;
         _outputImageView.image = grayScaleImage;
-        _outputImageView.clipsToBounds = NO;
+        _outputImageView.clipsToBounds = YES;
         [_outputImageView setFrame:AVMakeRectWithAspectRatioInsideRect(inputImage.size, _outputImageView.frame)];
         _outputImageViewSize = imageEffectInfo.imageSize;
         _prideEffect = PrideEffectHorizontal;
@@ -67,8 +69,9 @@ static NSArray* gayPrideCGRefColorsCollection;
 
 - (UIImage*)applyEffect {
     NSInteger numberOfColors = _gayPrideColorsCollection.count;
-    CGFloat heightForEachColorBar = _outputImageView.frame.size.height / numberOfColors;
-    CGFloat widthForEachColorBar = _outputImageView.frame.size.width / numberOfColors;
+    CGFloat totalHeight = _outputImageView.frame.size.height;
+    CGFloat totalWidth = _outputImageView.frame.size.width;
+
     UIView* overlayContainerView = [[UIView alloc] init];
     
     if (self.applyGradientOverlay) {
@@ -96,9 +99,11 @@ static NSArray* gayPrideCGRefColorsCollection;
         for (NSInteger i = 0; i < numberOfColors; i++) {
             CGRect overlayFrame;
             if (_prideEffect == PrideEffectHorizontal) {
-                overlayFrame = CGRectMake(0, i * heightForEachColorBar, _outputImageView.frame.size.width, heightForEachColorBar);
+                CGFloat heightForEachColorBar = totalHeight * [_totalHeightFractionCollection[i] floatValue];
+                overlayFrame = CGRectMake(0, i * heightForEachColorBar, totalWidth, heightForEachColorBar);
             } else if (_prideEffect == PrideEffectVertical) {
-                overlayFrame = CGRectMake((i * widthForEachColorBar), 0, widthForEachColorBar, _outputImageView.frame.size.height);
+                CGFloat widthForEachColorBar = totalWidth * [_totalHeightFractionCollection[i] floatValue];
+                overlayFrame = CGRectMake((i * widthForEachColorBar), 0, widthForEachColorBar, totalHeight);
             } else {
                 overlayFrame = CGRectMake(0, i * individualDiagonalBarWidth, diagonalLength, individualDiagonalBarWidth);
             }
@@ -117,6 +122,7 @@ static NSArray* gayPrideCGRefColorsCollection;
     
     if (_textRequired) {
         for (NSInteger i = 0; i < numberOfColors; i++) {
+            CGFloat heightForEachColorBar = totalHeight * [_totalHeightFractionCollection[i] floatValue];
             CATextLayer* overlayTextLayer = [CATextLayer new];
             overlayTextLayer.contentsScale = [UIScreen mainScreen].scale;
             // This filter is to avoid pixalation as label scale increases beyond its capacity.
