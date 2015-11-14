@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name          = 'JKFacebookPrideEffect'
-  s.version       = '0.0.7'
+  s.version       = '0.0.8'
   s.license       = 'MIT'
   s.summary       = 'Facebook style Pride parade effect'
   s.homepage      = 'https://github.com/jayesh15111988'

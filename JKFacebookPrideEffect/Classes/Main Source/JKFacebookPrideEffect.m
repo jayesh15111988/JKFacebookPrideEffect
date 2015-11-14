@@ -146,6 +146,7 @@ static NSArray* gayPrideCGRefColorsCollection;
             overlayImageDimensionFraction = [_totalHeightFractionCollection[desiredIndex] floatValue];
         }
         UIImageView* overlayImageView = [[UIImageView alloc] initWithImage:self.overlayImage];
+        overlayImageView.alpha = 0.5;
         overlayImageView.contentMode = UIViewContentModeScaleAspectFit;
         [overlayContainerView addSubview:overlayImageView];
         overlayImageView.frame =
